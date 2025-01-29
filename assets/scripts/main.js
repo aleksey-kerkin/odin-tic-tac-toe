@@ -25,6 +25,7 @@ const GameController = (() => {
   let players = [];
   let currentPlayerIndex;
   let gameOver;
+  let winningCombo = null;
 
   // Public methods
   return {
@@ -32,6 +33,7 @@ const GameController = (() => {
       players = [Player(player1Name, "X"), Player(player2Name, "O")];
       currentPlayerIndex = 0;
       gameOver = false;
+      winningCombo = null; // Reset winning combo
       GameBoard.resetBoard();
     },
 
@@ -54,6 +56,7 @@ const GameController = (() => {
     },
 
     checkGameOver() {
+      winningCombo = null;
       const winningCombos = [
         // Rows
         [0, 1, 2],
@@ -74,14 +77,17 @@ const GameController = (() => {
       for (const combo of winningCombos) {
         const [a, b, c] = combo;
         if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-          return true; // Win detected
+          winningCombo = combo; // Store winning indexes
+          return true; // Return boolean for win
         }
       }
+
       // Check for draw
       if (!board.includes(null)) return "draw";
 
-      return false; // Game continues
+      return false;
     },
+    getWinningCombo: () => winningCombo,
   };
 })();
 
@@ -93,21 +99,32 @@ const DisplayController = (() => {
     const board = GameBoard.getBoard();
     const currentPlayer = GameController.getCurrentPlayer();
     const gameOver = GameController.checkGameOver();
+    const winningCombo = GameController.getWinningCombo();
+
     boardElement.innerHTML = "";
     board.forEach((cell, index) => {
       const cellButton = document.createElement("button");
       cellButton.classList.add("gameboard--cell", "button");
       cellButton.textContent = cell || "";
+      if (cell === "X") {
+        cellButton.classList.add("color--pink");
+      } else {
+        cellButton.classList.add("color--green");
+      }
       cellButton.addEventListener("click", () => {
         GameController.handleTurn(index);
         render(); // re-render each move
       });
       boardElement.appendChild(cellButton);
+      if (gameOver && winningCombo?.includes(index)) {
+        cellButton.classList.add("winner--cell");
+      }
+      cellButton.disabled = gameOver || cell !== null;
     });
-    if (gameOver === "draw") {
-      statusElement.textContent = "Game Over - It's a draw!";
-    } else if (gameOver) {
-      statusElement.textContent = `Game Over - ${currentPlayer.getName()} wins!`;
+    if (gameOver === true) {
+      statusElement.textContent = `${currentPlayer.getName()} wins!`;
+    } else if (gameOver === "draw") {
+      statusElement.textContent = "It's a draw!";
     } else {
       statusElement.textContent = `${currentPlayer.getName()}'s turn (${currentPlayer.getMarker()})`;
     }

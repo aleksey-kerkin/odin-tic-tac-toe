@@ -95,15 +95,14 @@ h6 {
   --lunar-green: #c3e88d; /* Positive action */
   --wormhole-teal: #4fd6be; /* Progress indicator */
   --crater-lake: #41a6b5; /* Info status */
+  --dark-matter: #bb9af7; /* Purple accent */
+  --singularity-purple: #9d7cd8; /* Dark purple accent */
+  --pulsar-pink: #ff007c; /* Bright accent */
   /* warnings & errors */
   --solar-flare: #ff9e64; /* Warning */
   --sunspot-orange: #ffc777; /* Secondary warning */
   --supernova-red: #ff757f; /* Error/danger */
   --black-hole: #c53b53; /* Critical error */
-  /* cosmic accents */
-  --dark-matter: #bb9af7; /* Purple accent */
-  --singularity-purple: #9d7cd8; /* Dark purple accent */
-  --pulsar-pink: #ff007c; /* Bright accent */
 }
 
 body {
@@ -149,6 +148,10 @@ body {
   aspect-ratio: 1;
   width: 100%;
   font-size: 3rem;
+  &:disabled {
+    border: none;
+    background: var(--starless-night);
+  }
 }
 
 .color--pink {
@@ -157,4 +160,23 @@ body {
 
 .color--green {
   color: var(--lunar-green);
+}
+
+.gameboard--cell.winner--cell {
+  color: var(--quantum-sky);
+  background: var(--crater-lake);
+  border-color: var(--quantum-sky);
+  animation: pulse 0.7s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.021);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
