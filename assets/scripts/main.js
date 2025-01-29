@@ -25,6 +25,7 @@ const GameController = (() => {
   let players = [];
   let currentPlayerIndex;
   let gameOver;
+  const statusElement = document.querySelector(".status");
 
   // Public methods
   return {
@@ -32,6 +33,10 @@ const GameController = (() => {
       players = [Player(player1Name, "X"), Player(player2Name, "O")];
       currentPlayerIndex = 0;
       gameOver = false;
+      statusElement.textContent = `
+      Player ${this.getCurrentPlayer().getName()}'s turn,
+      place marker: ${this.getCurrentPlayer().getMarker()}
+      `;
       GameBoard.resetBoard();
     },
 
@@ -41,25 +46,26 @@ const GameController = (() => {
 
     handleTurn(index) {
       if (gameOver) return;
-
       const success = GameBoard.placeMarker(
         index,
         this.getCurrentPlayer().getMarker()
       );
 
       if (success) {
-        console.log(`
-          Player ${this.getCurrentPlayer().getName()} 
-          placed marker: ${this.getCurrentPlayer().getMarker()}
-        `);
         gameOver = this.checkGameOver();
-        if (!gameOver) currentPlayerIndex = 1 - currentPlayerIndex;
+        if (!gameOver) {
+          currentPlayerIndex = 1 - currentPlayerIndex;
+          statusElement.textContent = `
+          Player ${this.getCurrentPlayer().getName()}'s turn,
+          place marker: ${this.getCurrentPlayer().getMarker()}
+          `;
+        }
       }
       if (gameOver) {
         if (gameOver === "draw") {
-          console.log("It's a draw!");
+          statusElement.textContent = "It's a draw!";
         } else {
-          console.log(`Player ${this.getCurrentPlayer().getName()} wins!`);
+          statusElement.textContent = `Player ${this.getCurrentPlayer().getName()} wins!`;
         }
       }
     },
@@ -95,3 +101,34 @@ const GameController = (() => {
     },
   };
 })();
+
+const DisplayController = (() => {
+  const boardElement = document.querySelector(".gameboard");
+  const statusElement = document.querySelector(".status");
+  // const currentPlayer = GameController.getCurrentPlayer();
+
+  const render = () => {
+    const board = GameBoard.getBoard();
+    // statusElement.textContent = `${currentPlayer}`;
+    boardElement.innerHTML = "";
+    board.forEach((cell, index) => {
+      const cellButton = document.createElement("button");
+      cellButton.classList.add("gameboard--cell", "button");
+      cellButton.textContent = cell || "";
+      cellButton.addEventListener("click", () => {
+        GameController.handleTurn(index);
+        render(); // re-render each move
+      });
+      boardElement.appendChild(cellButton);
+    });
+  };
+
+  return { render };
+})();
+
+document.querySelector(".button--start").addEventListener("click", () => {
+  const player1 = prompt("Player 1 Name:");
+  const player2 = prompt("Player 2 Name:");
+  GameController.startNewGame(player1, player2);
+  DisplayController.render();
+});

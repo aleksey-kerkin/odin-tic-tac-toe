@@ -71,15 +71,55 @@ h6 {
 
 /* main-styles */
 
-body {
-  min-height: 100dvh;
+:root {
+  /* core colors */
+  --space-black: #1f2335; /* Deep cosmic background */
+  --nebula-dark: #24283b; /* Secondary dark layer */
+  --void-blue: #292e42; /* Tertiary dark accent */
+  /* blue spectrum */
+  --twilight-border: #3b4261; /* Border/divider color */
+  --moonlit-slate: #414868; /* Secondary border */
+  --starless-night: #545c7e; /* Inactive element background */
+  --galaxy-gray: #565f89; /* Disabled text */
+  /* ui & text */
+  --cosmic-text: #737aa2; /* Secondary text */
+  --stardust-blue: #a9b1d6; /* Primary text */
+  --comet-trail: #c0caf5; /* Bright text/headings */
+  /* interactive elements */
+  --deep-space-blue: #394b70; /* Button background */
+  --astral-blue: #3d59a1; /* Hover state */
+  --ion-thrust: #7aa2f7; /* Active state */
+  --quantum-sky: #7dcfff; /* Highlight/alert */
+  /* special accents */
+  --nova-cyan: #b4f9f8; /* Success/notification */
+  --lunar-green: #c3e88d; /* Positive action */
+  --wormhole-teal: #4fd6be; /* Progress indicator */
+  --crater-lake: #41a6b5; /* Info status */
+  /* warnings & errors */
+  --solar-flare: #ff9e64; /* Warning */
+  --sunspot-orange: #ffc777; /* Secondary warning */
+  --supernova-red: #ff757f; /* Error/danger */
+  --black-hole: #c53b53; /* Critical error */
+  /* cosmic accents */
+  --dark-matter: #bb9af7; /* Purple accent */
+  --singularity-purple: #9d7cd8; /* Dark purple accent */
+  --pulsar-pink: #ff007c; /* Bright accent */
 }
 
-.game-board {
-  gap: 0.5rem;
-  width: min(90vw, 600px);
-  margin: 2rem auto;
+body {
+  justify-items: center;
+  color: var(--cosmic-text);
+  background-color: var(--space-black);
+}
 
+.gameboard {
+  gap: 0.5rem;
+  width: min(90vw, 37rem);
+  margin-block: 5dvh;
+  padding: 0.5rem;
+
+  border: 0.5rem solid var(--twilight-border);
+  border-radius: 0.2rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 1fr;
@@ -87,16 +127,34 @@ body {
   align-items: center;
 }
 
-.cell {
+.button {
+  background: var(--deep-space-blue);
+  color: var(--comet-trail);
+  border: 0.2rem solid var(--twilight-border);
+  border-radius: 0.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover {
+    background: var(--astral-blue);
+  }
+}
+
+.button--start {
+  margin-top: 15vh;
+  padding-block: 0.5rem;
+  padding-inline: 1rem;
+}
+
+.gameboard--cell {
   aspect-ratio: 1;
   width: 100%;
   font-size: 3rem;
-  background: white;
-  border: 1px solid #ddd;
-  cursor: pointer;
-  transition: background 0.2s;
 }
 
-.cell:hover {
-  background: #f0f0f0;
+.color--pink {
+  color: var(--pulsar-pink);
+}
+
+.color--green {
+  color: var(--lunar-green);
 }
