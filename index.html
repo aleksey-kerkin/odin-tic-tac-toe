@@ -8,7 +8,25 @@
     <title>Tic-Tac-Toe</title>
   </head>
   <body>
-    <button class="button--start button">Start Game</button>
+    <div class="header">
+      <h1 class="header--title">Tic-Tac-Toe</h1>
+    </div>
+    <div class="player-form">
+      <input
+        type="text"
+        id="player1"
+        class="player-form--input"
+        placeholder="Player X Name"
+        required />
+      <input
+        type="text"
+        id="player2"
+        class="player-form--input"
+        placeholder="Player O Name"
+        required />
+      <button class="button--start button">Start Game</button>
+      <button class="button--restart button">Restart Game</button>
+    </div>
     <div class="gameboard">
       <button class="gameboard--cell" disabled></button>
       <button class="gameboard--cell" disabled></button>
@@ -20,6 +38,20 @@
       <button class="gameboard--cell" disabled></button>
       <button class="gameboard--cell" disabled></button>
     </div>
-    <div class="status">To start press the button above</div>
+    <div class="status">
+      To start fill the form && press the button above.
+      <br />
+      <br />
+      If you want to start over without changing the names, then press
+      &laquo;Reset Game&raquo; at any point in the game.
+    </div>
+    <div class="footer">
+      &copy; 2025
+      <a href="https://github.com/aleksey-kerkin">aleksey-kerkin</a>
+      for
+      <a href="https://www.theodinproject.com">
+        &laquo;The Odin Project&raquo;
+      </a>
+    </div>
   </body>
 </html>

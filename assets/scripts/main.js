@@ -84,9 +84,9 @@ const GameController = (() => {
 
       // Check for draw
       if (!board.includes(null)) return "draw";
-
       return false;
     },
+    getPlayers: () => players,
     getWinningCombo: () => winningCombo,
   };
 })();
@@ -108,7 +108,7 @@ const DisplayController = (() => {
       cellButton.textContent = cell || "";
       if (cell === "X") {
         cellButton.classList.add("color--pink");
-      } else {
+      } else if (cell === "O") {
         cellButton.classList.add("color--green");
       }
       cellButton.addEventListener("click", () => {
@@ -133,9 +133,19 @@ const DisplayController = (() => {
   return { render };
 })();
 
-document.querySelector(".button--start").addEventListener("click", () => {
-  const player1 = prompt("Player 1 Name:");
-  const player2 = prompt("Player 2 Name:");
+document.querySelector(".button--start").addEventListener("click", (e) => {
+  e.preventDefault(); // Prevent form submission
+  const player1 = document.getElementById("player1").value || "Player 1";
+  const player2 = document.getElementById("player2").value || "Player 2";
   GameController.startNewGame(player1, player2);
   DisplayController.render();
+});
+
+document.querySelector(".button--restart").addEventListener("click", () => {
+  const currentPlayers = GameController.getPlayers();
+  GameController.startNewGame(
+    currentPlayers[0].getName(),
+    currentPlayers[1].getName()
+  );
+  DisplayController.render(); // Force immediate re-render
 });

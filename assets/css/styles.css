@@ -106,15 +106,55 @@ h6 {
 }
 
 body {
+  display: grid;
+  align-items: start;
+  min-height: 100dvh;
   justify-items: center;
   color: var(--cosmic-text);
   background-color: var(--space-black);
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: 0.5s ease;
+  &:hover {
+    color: var(--pulsar-pink);
+  }
+}
+
+.header {
+  align-self: start;
+  margin-block: 4dvh 1dvh;
+}
+
+.player-form {
+  display: grid;
+  min-width: min(50dvw, 21rem);
+  justify-items: center;
+  gap: 0.5rem;
+}
+
+.player-form--input {
+  border: 0.2rem solid var(--twilight-border);
+  border-radius: 0.2rem;
+  width: 90%;
+  outline: none;
+  color: var(--lunar-green);
+  background: var(--deep-space-blue);
+  transition: 0.5s ease;
+  &::placeholder {
+    color: var(--cosmic-text);
+  }
+  &:focus {
+    border: 0.2rem solid var(--ion-thrust);
+  }
+}
+
 .gameboard {
   gap: 0.5rem;
-  width: min(90vw, 37rem);
-  margin-block: 5dvh;
+  width: min(70vw, 28rem);
+  margin-block: 4dvh 1dvh;
   padding: 0.5rem;
 
   border: 0.5rem solid var(--twilight-border);
@@ -127,24 +167,29 @@ body {
 }
 
 .button {
+  padding-block: 0.3rem;
+  padding-inline: 0.5rem;
+  font-weight: bold;
+  width: 90%;
   background: var(--deep-space-blue);
   color: var(--comet-trail);
   border: 0.2rem solid var(--twilight-border);
   border-radius: 0.2rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: 0.5s ease;
   &:hover {
     background: var(--astral-blue);
   }
-}
-
-.button--start {
-  margin-top: 15vh;
-  padding-block: 0.5rem;
-  padding-inline: 1rem;
+  &.button--start:hover {
+    color: var(--lunar-green);
+  }
+  &.button--restart:hover {
+    color: var(--pulsar-pink);
+  }
 }
 
 .gameboard--cell {
+  padding: 0;
   aspect-ratio: 1;
   width: 100%;
   font-size: 3rem;
@@ -152,6 +197,11 @@ body {
     border: none;
     background: var(--starless-night);
   }
+}
+
+.status {
+  text-align: center;
+  max-width: min(50dvw, 28rem);
 }
 
 .color--pink {
@@ -179,4 +229,9 @@ body {
   100% {
     transform: scale(1);
   }
+}
+
+.footer {
+  align-self: end;
+  margin-block: 3dvh 1dvh;
 }
