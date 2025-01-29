@@ -25,7 +25,6 @@ const GameController = (() => {
   let players = [];
   let currentPlayerIndex;
   let gameOver;
-  const statusElement = document.querySelector(".status");
 
   // Public methods
   return {
@@ -33,10 +32,6 @@ const GameController = (() => {
       players = [Player(player1Name, "X"), Player(player2Name, "O")];
       currentPlayerIndex = 0;
       gameOver = false;
-      statusElement.textContent = `
-      Player ${this.getCurrentPlayer().getName()}'s turn,
-      place marker: ${this.getCurrentPlayer().getMarker()}
-      `;
       GameBoard.resetBoard();
     },
 
@@ -53,20 +48,8 @@ const GameController = (() => {
 
       if (success) {
         gameOver = this.checkGameOver();
-        if (!gameOver) {
-          currentPlayerIndex = 1 - currentPlayerIndex;
-          statusElement.textContent = `
-          Player ${this.getCurrentPlayer().getName()}'s turn,
-          place marker: ${this.getCurrentPlayer().getMarker()}
-          `;
-        }
-      }
-      if (gameOver) {
-        if (gameOver === "draw") {
-          statusElement.textContent = "It's a draw!";
-        } else {
-          statusElement.textContent = `Player ${this.getCurrentPlayer().getName()} wins!`;
-        }
+        if (!gameOver) currentPlayerIndex = 1 - currentPlayerIndex;
+        DisplayController.render();
       }
     },
 
@@ -105,11 +88,11 @@ const GameController = (() => {
 const DisplayController = (() => {
   const boardElement = document.querySelector(".gameboard");
   const statusElement = document.querySelector(".status");
-  // const currentPlayer = GameController.getCurrentPlayer();
 
   const render = () => {
     const board = GameBoard.getBoard();
-    // statusElement.textContent = `${currentPlayer}`;
+    const currentPlayer = GameController.getCurrentPlayer();
+    const gameOver = GameController.checkGameOver();
     boardElement.innerHTML = "";
     board.forEach((cell, index) => {
       const cellButton = document.createElement("button");
@@ -121,6 +104,13 @@ const DisplayController = (() => {
       });
       boardElement.appendChild(cellButton);
     });
+    if (gameOver === "draw") {
+      statusElement.textContent = "Game Over - It's a draw!";
+    } else if (gameOver) {
+      statusElement.textContent = `Game Over - ${currentPlayer.getName()} wins!`;
+    } else {
+      statusElement.textContent = `${currentPlayer.getName()}'s turn (${currentPlayer.getMarker()})`;
+    }
   };
 
   return { render };
