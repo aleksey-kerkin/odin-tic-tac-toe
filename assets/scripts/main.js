@@ -104,6 +104,15 @@ const DisplayController = (() => {
     boardElement.innerHTML = "";
     board.forEach((cell, index) => {
       const cellButton = document.createElement("button");
+      cellButton.setAttribute(
+        "aria-label",
+        cell
+          ? `${cell} marker at position ${index + 1}`
+          : `Empty cell ${index + 1}`
+      );
+      cellButton.setAttribute("role", "gridcell");
+      cellButton.setAttribute("tabindex", "0"); // Make focusable
+      cellButton.setAttribute("aria-disabled", cell !== null);
       cellButton.classList.add("gameboard--cell", "button");
       cellButton.textContent = cell || "";
       if (cell === "X") {

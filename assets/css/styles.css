@@ -17,14 +17,6 @@ body {
   color: rgb(0, 0, 0);
 }
 
-header,
-main,
-section,
-article,
-footer {
-  container-type: inline-size;
-}
-
 img,
 picture,
 video,
@@ -70,7 +62,6 @@ h6 {
 }
 
 /* main-styles */
-
 :root {
   /* core colors */
   --space-black: #1f2335; /* Deep cosmic background */
@@ -107,20 +98,43 @@ h6 {
 
 body {
   display: grid;
-  align-items: start;
   min-height: 100dvh;
+  align-items: center;
   justify-items: center;
   color: var(--cosmic-text);
   background-color: var(--space-black);
+}
+
+main {
+  justify-content: center;
+  display: grid;
+  align-items: start;
+  justify-items: center;
 }
 
 a {
   text-decoration: none;
   color: inherit;
   transition: 0.5s ease;
+  outline: none;
   &:hover {
     color: var(--pulsar-pink);
   }
+  &:focus {
+    border-bottom: 0.2rem solid var(--pulsar-pink);
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .header {
@@ -174,17 +188,24 @@ a {
   background: var(--deep-space-blue);
   color: var(--comet-trail);
   border: 0.2rem solid var(--twilight-border);
+  outline: none;
   border-radius: 0.2rem;
   cursor: pointer;
   transition: 0.5s ease;
+
   &:hover {
-    background: var(--astral-blue);
+    border-color: var(--wormhole-teal);
+    background: var(--crater-lake);
   }
   &.button--start:hover {
     color: var(--lunar-green);
   }
   &.button--restart:hover {
     color: var(--pulsar-pink);
+  }
+
+  &:focus {
+    border: 0.2rem solid var(--ion-thrust);
   }
 }
 
@@ -200,8 +221,9 @@ a {
 }
 
 .status {
+  text-wrap: balance;
   text-align: center;
-  max-width: min(50dvw, 28rem);
+  max-width: min(80dvw, 28rem);
 }
 
 .color--pink {
