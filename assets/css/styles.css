@@ -256,4 +256,6 @@ a {
 .footer {
   align-self: end;
   margin-block: 3dvh 1dvh;
+  text-align: center;
+  max-width: min(80dvw, 28rem);
 }
