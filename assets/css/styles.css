@@ -63,37 +63,18 @@ h6 {
 
 /* main-styles */
 :root {
-  /* core colors */
-  --space-black: #1f2335; /* Deep cosmic background */
-  --nebula-dark: #24283b; /* Secondary dark layer */
-  --void-blue: #292e42; /* Tertiary dark accent */
-  /* blue spectrum */
-  --twilight-border: #3b4261; /* Border/divider color */
-  --moonlit-slate: #414868; /* Secondary border */
-  --starless-night: #545c7e; /* Inactive element background */
-  --galaxy-gray: #565f89; /* Disabled text */
-  /* ui & text */
-  --cosmic-text: #737aa2; /* Secondary text */
-  --stardust-blue: #a9b1d6; /* Primary text */
-  --comet-trail: #c0caf5; /* Bright text/headings */
-  /* interactive elements */
-  --deep-space-blue: #394b70; /* Button background */
-  --astral-blue: #3d59a1; /* Hover state */
-  --ion-thrust: #7aa2f7; /* Active state */
-  --quantum-sky: #7dcfff; /* Highlight/alert */
-  /* special accents */
-  --nova-cyan: #b4f9f8; /* Success/notification */
-  --lunar-green: #c3e88d; /* Positive action */
-  --wormhole-teal: #4fd6be; /* Progress indicator */
-  --crater-lake: #41a6b5; /* Info status */
-  --dark-matter: #bb9af7; /* Purple accent */
-  --singularity-purple: #9d7cd8; /* Dark purple accent */
-  --pulsar-pink: #ff007c; /* Bright accent */
-  /* warnings & errors */
-  --solar-flare: #ff9e64; /* Warning */
-  --sunspot-orange: #ffc777; /* Secondary warning */
-  --supernova-red: #ff757f; /* Error/danger */
-  --black-hole: #c53b53; /* Critical error */
+  --space-black: #1f2335;
+  --twilight-border: #3b4261;
+  --starless-night: #545c7e;
+  --cosmic-text: #737aa2;
+  --comet-trail: #c0caf5;
+  --deep-space-blue: #394b70;
+  --ion-thrust: #7aa2f7;
+  --quantum-sky: #7dcfff;
+  --lunar-green: #c3e88d;
+  --wormhole-teal: #4fd6be;
+  --crater-lake: #41a6b5;
+  --pulsar-pink: #ff007c;
 }
 
 body {
@@ -246,7 +227,7 @@ a {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.021);
+    transform: scale(1.035);
   }
   100% {
     transform: scale(1);
